@@ -29,16 +29,16 @@ window.WORKS_DATA = [
   { slug: 'bauer',                  title: 'Bauer',                               type: 'CGI',          cat: '(upcoming)',      year: '2025' },
 ];
 
-// ── Clock (Paris time) ───────────────────────────────────────────────────────
+// ── Clock (NYC time) ─────────────────────────────────────────────────────────
 function updateClock() {
-  const paris = new Intl.DateTimeFormat('en-US', {
-    timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit',
+  const nyc = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit',
     second: '2-digit', hour12: false
   }).format(new Date());
   const c1 = document.getElementById('clock');
   const c2 = document.getElementById('clock2');
-  if (c1) c1.textContent = paris;
-  if (c2) c2.textContent = paris;
+  if (c1) c1.textContent = nyc;
+  if (c2) c2.textContent = nyc;
 }
 updateClock();
 setInterval(updateClock, 1000);
@@ -57,8 +57,8 @@ if (cur) {
 }
 
 // ── Menu ─────────────────────────────────────────────────────────────────────
-const overlay  = document.getElementById('menu-overlay');
-const menuOpen = document.getElementById('menuOpen');
+const overlay   = document.getElementById('menu-overlay');
+const menuOpen  = document.getElementById('menuOpen');
 const menuClose = document.getElementById('menuClose');
 if (overlay && menuOpen && menuClose) {
   menuOpen.addEventListener('click',  () => { overlay.classList.add('open');    document.body.style.overflow = 'hidden'; });
