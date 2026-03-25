@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Works — Culte Commun</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared.css" />
+  <style>
+    .page-header {
+      padding: calc(var(--nav-h) + 48px) 24px 24px;
+      border-bottom: 1px solid #1e1e1e;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .page-header h1 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(28px, 5vw, 52px);
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+    }
+    .page-header .count {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--fg-dim);
+    }
+
+    .works {
+      padding: 2px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    @media (max-width: 900px) { .works { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 560px) { .works { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div id="cursor"></div>
+  <nav>
+    <a href="../index.html" class="nav-logo">Culte Commun</a>
+    <div class="nav-right">
+      <div class="nav-location">Paris ⏤ FR &nbsp;|&nbsp; <span id="clock">--:--:--</span></div>
+      <button class="menu-btn" id="menuOpen">Menu</button>
+    </div>
+  </nav>
+
+  <div id="menu-overlay">
+    <div class="menu-top">
+      <a href="../index.html" class="nav-logo">Culte Commun</a>
+      <button class="menu-close" id="menuClose">Close</button>
+    </div>
+    <div class="menu-body">
+      <a href="../index.html" class="menu-link">Home</a>
+      <a href="index.html" class="menu-link">Works</a>
+      <a href="../about.html" class="menu-link">About</a>
+      <a href="../contact.html" class="menu-link">Contact</a>
+    </div>
+    <div class="menu-footer">
+      <div class="menu-social">
+        <a href="https://www.instagram.com/culte.commun/" target="_blank">Instagram</a>
+        <a href="https://x.com/cultecommun/" target="_blank">Twitter X</a>
+        <a href="https://fr.linkedin.com/company/culte-commun" target="_blank">LinkedIn</a>
+      </div>
+      <div class="menu-loc">Location — Timezone<span>Paris ⏤ FR</span><span id="clock2">--:--:--</span></div>
+    </div>
+  </div>
+
+  <main class="page-enter">
+    <div class="page-header">
+      <h1>Works</h1>
+      <span class="count" id="count"></span>
+    </div>
+    <section class="works" id="works"></section>
+  </main>
+
+  <footer>
+    <p class="footer-copy">© 2026 Culte Commun. All rights reserved.</p>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/culte.commun/" target="_blank">Instagram</a>
+      <a href="https://x.com/cultecommun/" target="_blank">Twitter X</a>
+      <a href="https://fr.linkedin.com/company/culte-commun" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script src="../shared.js"></script>
+  <script>
+    const works = window.WORKS_DATA;
+    document.getElementById('count').textContent = works.length + ' projects';
+    const grid = document.getElementById('works');
+    const cur = document.getElementById('cursor');
+    works.forEach(w => {
+      const a = document.createElement('a');
+      a.href = w.slug + '.html';
+      a.className = 'work-item';
+      a.innerHTML = `
+        <div class="work-placeholder"><div class="work-placeholder-inner">${w.title}</div></div>
+        <div class="work-strip"><span class="work-type">${w.type}</span><span class="work-year">${w.year}</span></div>
+        <div class="work-info"><div class="work-tags"><span>${w.cat}</span></div><div class="work-title">${w.title}</div></div>`;
+      a.addEventListener('mouseenter', () => cur.classList.add('expand'));
+      a.addEventListener('mouseleave', () => cur.classList.remove('expand'));
+      grid.appendChild(a);
+    });
+  </script>
+</body>
+</html>

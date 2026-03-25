@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Culte Commun</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .about-wrap {
+      padding: calc(var(--nav-h) + 80px) 24px 100px;
+      max-width: 900px;
+    }
+    .about-label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--fg-dim); margin-bottom: 32px;
+    }
+    .about-heading {
+      font-family: var(--sans); font-weight: 800;
+      font-size: clamp(28px, 5vw, 56px); line-height: 1.1;
+      letter-spacing: -.01em; margin-bottom: 48px;
+    }
+    .about-body {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px 60px;
+    }
+    @media (max-width: 700px) { .about-body { grid-template-columns: 1fr; } }
+    .about-col p {
+      font-family: var(--sans); font-size: 15px; line-height: 1.7;
+      color: #c0bcb6; font-weight: 400; margin-bottom: 16px;
+    }
+    .about-services {
+      padding: 60px 24px 80px;
+      border-top: 1px solid #1e1e1e;
+    }
+    .services-label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--fg-dim); margin-bottom: 24px;
+    }
+    .services-list {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    }
+    @media (max-width: 700px) { .services-list { grid-template-columns: 1fr 1fr; } }
+    .service-item {
+      padding: 28px 20px;
+      background: #141414;
+      border: 1px solid #1e1e1e;
+    }
+    .service-num {
+      font-family: var(--mono); font-size: 10px; color: var(--fg-dim);
+      letter-spacing: .08em; margin-bottom: 12px;
+    }
+    .service-name {
+      font-family: var(--sans); font-weight: 700; font-size: 14px;
+      letter-spacing: .02em; margin-bottom: 8px;
+    }
+    .service-desc {
+      font-family: var(--sans); font-size: 12px; color: var(--fg-dim); line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">Culte Commun</a>
+    <div class="nav-right">
+      <div class="nav-location">Paris ⏤ FR &nbsp;|&nbsp; <span id="clock">--:--:--</span></div>
+      <button class="menu-btn" id="menuOpen">Menu</button>
+    </div>
+  </nav>
+
+  <div id="menu-overlay">
+    <div class="menu-top">
+      <a href="index.html" class="nav-logo">Culte Commun</a>
+      <button class="menu-close" id="menuClose">Close</button>
+    </div>
+    <div class="menu-body">
+      <a href="index.html" class="menu-link">Home</a>
+      <a href="works/index.html" class="menu-link">Works</a>
+      <a href="about.html" class="menu-link">About</a>
+      <a href="contact.html" class="menu-link">Contact</a>
+    </div>
+    <div class="menu-footer">
+      <div class="menu-social">
+        <a href="https://www.instagram.com/culte.commun/" target="_blank">Instagram</a>
+        <a href="https://x.com/cultecommun/" target="_blank">Twitter X</a>
+        <a href="https://fr.linkedin.com/company/culte-commun" target="_blank">LinkedIn</a>
+      </div>
+      <div class="menu-loc">Location — Timezone<span>Paris ⏤ FR</span><span id="clock2">--:--:--</span></div>
+    </div>
+  </div>
+
+  <main class="page-enter">
+    <div class="about-wrap">
+      <p class="about-label">About</p>
+      <h1 class="about-heading">We create images<br>that move people.</h1>
+      <div class="about-body">
+        <div class="about-col">
+          <p>Culte Commun is a Paris-based imaging studio specialising in CGI, AI, and visual storytelling for brands across fashion, sport, luxury, and culture.</p>
+          <p>We build worlds from scratch — developing the visual language for campaigns, brand identities, and editorial projects from concept through to final pixel.</p>
+        </div>
+        <div class="about-col">
+          <p>Our work sits at the intersection of craft and computation, combining traditional creative direction with cutting-edge rendering and AI pipelines.</p>
+          <p>We collaborate with agencies, brands, and creative directors worldwide to produce images that leave a lasting impression.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-services">
+      <p class="services-label">Services</p>
+      <div class="services-list">
+        <div class="service-item">
+          <div class="service-num">01</div>
+          <div class="service-name">CGI Production</div>
+          <div class="service-desc">3D modelling, rendering, and compositing for campaigns, product visuals, and film.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">02</div>
+          <div class="service-name">AI Imaging</div>
+          <div class="service-desc">Custom AI pipelines integrated with CGI for concept development and final deliverables.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">03</div>
+          <div class="service-name">Campaign Direction</div>
+          <div class="service-desc">End-to-end creative direction for advertising and brand campaigns.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">04</div>
+          <div class="service-name">Visualisation</div>
+          <div class="service-desc">Architectural, product, and brand visualisation for communication and storytelling.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">05</div>
+          <div class="service-name">Motion & Film</div>
+          <div class="service-desc">Animated CGI films, titles, and motion graphics for broadcast and digital.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">06</div>
+          <div class="service-name">Design & Art Direction</div>
+          <div class="service-desc">Visual identity, graphic design, and art direction to complement imaging work.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p class="footer-copy">© 2026 Culte Commun. All rights reserved.</p>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/culte.commun/" target="_blank">Instagram</a>
+      <a href="https://x.com/cultecommun/" target="_blank">Twitter X</a>
+      <a href="https://fr.linkedin.com/company/culte-commun" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+  <script src="shared.js"></script>
+</body>
+</html>
