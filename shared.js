@@ -44,15 +44,15 @@ updateClock();
 setInterval(updateClock, 1000);
 
 // ── Cursor ───────────────────────────────────────────────────────────────────
-const cur = document.getElementById('cursor');
-if (cur) {
+window.cur = document.getElementById('cursor');
+if (window.cur) {
   document.addEventListener('mousemove', e => {
-    cur.style.left = e.clientX + 'px';
-    cur.style.top  = e.clientY + 'px';
+    window.cur.style.left = e.clientX + 'px';
+    window.cur.style.top  = e.clientY + 'px';
   });
   document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => cur.classList.add('expand'));
-    el.addEventListener('mouseleave', () => cur.classList.remove('expand'));
+    el.addEventListener('mouseenter', () => window.cur.classList.add('expand'));
+    el.addEventListener('mouseleave', () => window.cur.classList.remove('expand'));
   });
 }
 

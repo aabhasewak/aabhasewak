@@ -74,20 +74,19 @@
 
   <script src="../shared.js"></script>
   <script>
-    const works = window.WORKS_DATA;
+    var works = window.WORKS_DATA;
     document.getElementById('count').textContent = works.length + ' projects';
-    const grid = document.getElementById('works');
-    const cur  = document.getElementById('cursor');
-    works.forEach(w => {
-      const a = document.createElement('a');
+    var grid = document.getElementById('works');
+    works.forEach(function(w) {
+      var a = document.createElement('a');
       a.href = w.slug + '.html';
       a.className = 'work-item';
-      a.innerHTML = `
-        <div class="work-placeholder"><div class="work-placeholder-inner">${w.title}</div></div>
-        <div class="work-strip"><span class="work-type">${w.type}</span><span class="work-year">${w.year}</span></div>
-        <div class="work-info"><div class="work-tags"><span>${w.cat}</span></div><div class="work-title">${w.title}</div></div>`;
-      a.addEventListener('mouseenter', () => cur.classList.add('expand'));
-      a.addEventListener('mouseleave', () => cur.classList.remove('expand'));
+      a.innerHTML =
+        '<div class="work-placeholder"><div class="work-placeholder-inner">' + w.title + '</div></div>' +
+        '<div class="work-strip"><span class="work-type">' + w.type + '</span><span class="work-year">' + w.year + '</span></div>' +
+        '<div class="work-info"><div class="work-tags"><span>' + w.cat + '</span></div><div class="work-title">' + w.title + '</div></div>';
+      a.addEventListener('mouseenter', function() { window.cur.classList.add('expand'); });
+      a.addEventListener('mouseleave', function() { window.cur.classList.remove('expand'); });
       grid.appendChild(a);
     });
   </script>
