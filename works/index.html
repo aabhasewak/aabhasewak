@@ -6,26 +6,80 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../shared.css" />
   <style>
-    .page-header {
-      padding: calc(var(--nav-h) + 48px) 24px 24px;
-      border-bottom: 1px solid #1e1e1e;
-      display: flex; align-items: baseline; justify-content: space-between;
+    .works-list {
+      padding-top: var(--nav-h);
+      padding-bottom: 80px;
     }
-    .page-header h1 {
-      font-family: var(--sans); font-weight: 800;
-      font-size: clamp(28px, 5vw, 52px); letter-spacing: -.01em; text-transform: uppercase;
+
+    .work-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 18px 48px;
+      border-bottom: 1px solid #1a1a1a;
+      text-decoration: none;
+      color: var(--fg);
+      cursor: none;
+      transition: background .25s;
     }
-    .page-header .count { font-family: var(--mono); font-size: 11px; color: var(--fg-dim); }
-    .works {
-      padding: 2px; display: grid;
-      grid-template-columns: repeat(3, 1fr); gap: 2px;
+    .work-row:first-child { border-top: 1px solid #1a1a1a; }
+    .work-row:hover { background: #111; }
+
+    .work-row-meta-left {
+      position: absolute;
+      left: 24px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      line-height: 1.5;
     }
-    @media (max-width: 900px) { .works { grid-template-columns: repeat(2,1fr); } }
-    @media (max-width: 560px) { .works { grid-template-columns: 1fr; } }
+
+    .work-row-title {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(20px, 4vw, 52px);
+      text-transform: uppercase;
+      letter-spacing: -.01em;
+      text-align: center;
+      transition: opacity .2s;
+    }
+    .work-row:hover .work-row-title { opacity: .6; }
+
+    .work-row-year {
+      position: absolute;
+      right: 24px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .08em;
+      color: var(--fg-dim);
+    }
+
+    /* hover image that follows cursor */
+    #hover-img {
+      position: fixed;
+      width: 280px;
+      height: 200px;
+      object-fit: cover;
+      pointer-events: none;
+      z-index: 500;
+      opacity: 0;
+      transform: translate(-50%, -60%) scale(.96);
+      transition: opacity .25s, transform .25s;
+      border: none;
+    }
+    #hover-img.visible {
+      opacity: 1;
+      transform: translate(-50%, -60%) scale(1);
+    }
   </style>
 </head>
 <body>
   <div id="cursor"></div>
+  <img id="hover-img" src="" alt="" />
+
   <nav>
     <a href="../index.html" class="nav-logo">Aabha Sewak</a>
     <div class="nav-right">
@@ -56,11 +110,7 @@
   </div>
 
   <main class="page-enter">
-    <div class="page-header">
-      <h1>Works</h1>
-      <span class="count" id="count"></span>
-    </div>
-    <section class="works" id="works"></section>
+    <div class="works-list" id="works"></div>
   </main>
 
   <footer>
@@ -74,20 +124,42 @@
 
   <script src="../shared.js"></script>
   <script>
-    var works = window.WORKS_DATA;
-    document.getElementById('count').textContent = works.length + ' projects';
-    var grid = document.getElementById('works');
-    works.forEach(function(w) {
+    var list = document.getElementById('works');
+    var hoverImg = document.getElementById('hover-img');
+
+    // track mouse for hover image
+    document.addEventListener('mousemove', function(e) {
+      hoverImg.style.left = e.clientX + 'px';
+      hoverImg.style.top  = e.clientY + 'px';
+    });
+
+    window.WORKS_DATA.forEach(function(w) {
       var a = document.createElement('a');
       a.href = w.slug + '.html';
-      a.className = 'work-item';
+      a.className = 'work-row';
+
       a.innerHTML =
-        '<div class="work-placeholder"><div class="work-placeholder-inner">' + w.title + '</div></div>' +
-        '<div class="work-strip"><span class="work-type">' + w.type + '</span><span class="work-year">' + w.year + '</span></div>' +
-        '<div class="work-info"><div class="work-tags"><span>' + w.cat + '</span></div><div class="work-title">' + w.title + '</div></div>';
-      a.addEventListener('mouseenter', function() { window.cur.classList.add('expand'); });
-      a.addEventListener('mouseleave', function() { window.cur.classList.remove('expand'); });
-      grid.appendChild(a);
+        '<div class="work-row-meta-left">' + w.type + '<br>' + w.cat + '</div>' +
+        '<div class="work-row-title">' + w.title + '</div>' +
+        '<div class="work-row-year">' + w.year + '</div>';
+
+      // hover image preview if project has an img
+      if (w.img) {
+        a.addEventListener('mouseenter', function() {
+          hoverImg.src = '../assets/' + w.img;
+          hoverImg.classList.add('visible');
+          window.cur.classList.add('expand');
+        });
+        a.addEventListener('mouseleave', function() {
+          hoverImg.classList.remove('visible');
+          window.cur.classList.remove('expand');
+        });
+      } else {
+        a.addEventListener('mouseenter', function() { window.cur.classList.add('expand'); });
+        a.addEventListener('mouseleave', function() { window.cur.classList.remove('expand'); });
+      }
+
+      list.appendChild(a);
     });
   </script>
 </body>
